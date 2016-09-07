@@ -1,0 +1,23 @@
+# This file tells git to ignore (i.e. not track or pay any attention
+# to) the files listed.
+#
+# We can provide patterns to tell it to ignore all files that end in
+# an extension by using the "*" (wildcard)
+#
+# More information here: https://git-scm.com/docs/gitignore
+#
+
+# Ignore files produced by gcov and g++ coverage flags
+*.gcov
+*.gcno
+*.gcda
+*.coverage
+
+# Try to ignore any produced binary files (like a.out)
+*.out
+
+# Ignore any temporary files produced by the Emacs text editor
+*~
+
+# Ignore any temporary files produced by the Vi or Vim editors
+.*.sw?

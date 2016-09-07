@@ -1,0 +1,6 @@
+.well, .jumbotron {
+  background-image: url("/assets/images/vile_full.svg");
+  background-position:center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,34 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-3"><strong>Reporter</strong></div>
+      <div class="col-sm-3"><strong>Suspect</strong></div>
+      <div class="col-sm-3"><strong>Location</strong></div>
+      <div class="col-sm-3"><strong>Time</strong></div>
+    </div>
+  </div>
+  <div class="list-group">
+    {% for obs in observations %}
+    <div class="list-group-item">
+      {# use the HTML escape filter to mitigate certain attacks #}
+      <div class="row">
+        <div class="col-sm-3">{{ obs.reporter | e }}</div>
+        <div class="col-sm-3">{{ obs.suspect | e }}</div>
+        <div class="col-sm-3">{{ obs.location | e }}</div>
+        <div class="col-sm-3">
+          {{ obs.time | e }}
+          <a class="btn btn-xs btn-danger pull-right" href="/remove/{{ obs.id }}/"><i class="fa fa-times"></i></a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="list-group-item">
+      No Observations found.
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

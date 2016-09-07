@@ -1,0 +1,67 @@
+#!/bin/bash
+
+##
+# show-coverage - A bash script for displaying code coverage
+#
+# Running this script does the follwing
+#   - Compiles *.cpp and links in Boost's unit test framework library
+#   - Runs the compiled executable (if it compiled correctly)
+#   - Uses `gcov` to generate code coverage reports for the executed tests
+#   - Removes irrelevant coverage reports and the generated executable
+#
+##
+
+# Stop the script if any of the commands fail
+set -e
+
+###
+# Compile the unit tests
+###
+
+echo -e "===== Compiling it ====="
+
+# fg++ is just g++ with  "-Wall -W -s -pedantic-errors" flags
+g++ -Wall -W -s -pedantic-errors -o coverage.out --profile-arcs --test-coverage *.cpp -lboost_unit_test_framework
+
+
+##
+# Run the unit tests
+##
+
+echo -e "\n===== Running a.out ====="
+set +e
+./coverage.out
+set -e
+
+
+##
+# Generate the ".coverage" files and display coverage percentages
+##
+
+echo -e "\n===== Checking coverage ====="
+gcov funcs.cpp rotor.cpp | grep -A2 "File '\(rotor\|funcs\)"
+
+
+##
+# Remove the junk that we generated in the process
+##
+
+echo -e "\n===== Cleaning up coverage data files ====="
+# Hang onto the interesting coverage reports
+mv funcs.cpp.gcov funcs.cpp.coverage
+mv rotor.cpp.gcov rotor.cpp.coverage
+
+# Remove the other junk
+rm -f *.gcov *.gcno *.gcda
+
+# Remove the coverage-generating executable
+rm -f coverage.out
+
+
+##
+# Text editor variables
+##
+
+# Local Variables:
+# mode: shell-script
+# End:

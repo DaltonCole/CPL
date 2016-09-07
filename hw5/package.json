@@ -1,0 +1,18 @@
+{
+  "name": "hw05",
+  "version": "1.0.0",
+  "description": "You read it!",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "argparse": "1.0.6",
+    "jscs": "2.10.1",
+    "jscs-jsdoc": "1.3.1",
+    "mocha": "2.4.5"
+  }
+}

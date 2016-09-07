@@ -1,0 +1,21 @@
+# Ignore the directory where we stash away node
+.my_nodejs
+
+# Ignore the symbolic link to the installed version of node
+bin
+
+# Ignore installed packages
+node_modules
+npm-debug.log
+
+# Ignore all data files.
+*.csv
+
+# Ignore editor temp files
+*~
+\#*\#
+.\#*
+.*.sw?
+
+# Ignore generated files
+out/

@@ -1,0 +1,13 @@
+# Built files
+*.js
+*.html
+
+# Downloaded dependencies
+elm-stuff/
+
+
+# Editor temp files
+*~
+\#*\#
+.\#*
+.*.sw?

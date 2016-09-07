@@ -1,0 +1,50 @@
+#!/bin/bash
+##
+#
+# A flake8 wrapper script
+#
+# It turns out that the version of flake8 on campus machines is for
+# Python 2.7, not Python 3.4. This script is a workaround.
+#
+# It creates a directory in the current folder and names it
+# ".virtualenv". The "." at the beginning makes it invisible when you
+# run "ls". To see it you have to run "ls -a".
+#
+# The script then creates a Python virtual environment in that hidden
+# folder and installs flake8 for Python3 in there.
+#
+# We haven't talked about virtual environments yet, so this was a
+# quick solution that is functional, though not idiomatic.
+#
+# Then it runs flake8 for you!
+#
+##
+
+VIRTUAL_ENV_DIR=".virtualenv"
+
+# We don't have a virtual environment. Time to make it!
+if [ ! -d "$VIRTUAL_ENV_DIR" ]
+then
+    echo "Looks like you don't have a virtual environment in here."
+    echo "Time to set one up!"
+    virtualenv --python=`which python3.4` $VIRTUAL_ENV_DIR
+fi
+
+# Activate the virtual environment
+source $VIRTUAL_ENV_DIR/bin/activate
+
+# Install flake8 in the virtual environment (if it's not already there)
+if [ ! -f $VIRTUAL_ENV_DIR/bin/flake8 ]
+then
+    echo "Oh no! Your virtual environment doesn't have flake8 installed!"
+    echo "Installing it now."
+    pip install flake8
+fi
+
+# Run flake8 and pass it the arguments from the command line (if there
+# were any)
+$VIRTUAL_ENV_DIR/bin/flake8 $@
+
+# Local Variables:
+# mode: shell-script
+# End:
